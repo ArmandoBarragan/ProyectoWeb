@@ -10,6 +10,32 @@
 </header>
 
 <main>
+    <nav id="registros">
+        <form action="">
+            <label for="">Buscar producto</label>
+            <input type="search">
+            <input type="submit" value="Buscar">
+        </form>
+    
+        <div>
+            <p>Registrar producto</p>
+            <form action="{% url 'index'%}" method="POST">
+                {% csrf_token %}
+                {{ form_producto }}
+                <input type="submit" value="Registrar" name="submit_producto">
+
+            </form>
+            </form>
+        </div>
+        <div>
+            <p>Registrar categoría</p>
+            <form action="{% url 'index'%}" method="POST">
+                {% csrf_token %}
+                {{ form_categoria }}
+                <input type="submit" value="Registrar" name="submit_categoria">
+            </form>
+        </div>
+    </nav>
     <table>
         <tr>
             <td colspan="5">Productos</td>
@@ -29,26 +55,5 @@
         <td>{{ producto.imagen }} </td>
         {% endfor %}
     </table>
-
-    <div id="registros">
-        <div>
-            <p>Registrar producto</p>
-            <form action="{% url 'index'%}" method="POST">
-                {% csrf_token %}
-                {{ form_producto }}
-                <input type="submit" value="Registrar" name="submit_producto">
-
-            </form>
-            </form>
-        </div>
-        <div>
-            <p>Registrar categoría</p>
-            <form action="{% url 'index'%}" method="POST">
-                {% csrf_token %}
-                {{ form_categoria }}
-                <input type="submit" value="Registrar" name="submit_categoria">
-            </form>
-        </div>
-    </div>
 </main>
 {% endblock %}
