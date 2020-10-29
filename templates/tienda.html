@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Abarrotes</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/tienda.css' %}">
+{% endblock %}
+{% block content %}
+<header>
+    <h1>Tienda</h1>
+</header>
+
+<main>
+    <table>
+        <tr>
+            <td colspan="5">Productos</td>
+        </tr>
+        <tr>
+            <td>Id</td>
+            <td>Nombre</td>
+            <td>Categoría</td>
+            <td>Precio</td>
+            <td>Imagen</td>
+        </tr>
+        {% for producto in productos %}
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ procuto.categoria }}</td>
+        <td>{{ producto.precio }}</td>
+        <td>{{ producto.imagen }} </td>
+        {% endfor %}
+    </table>
+
+    <div id="registros">
+        <div>
+            <p>Registrar producto</p>
+            <form action="{% url 'index'%}" method="POST">
+                {% csrf_token %}
+                {{ form_producto }}
+                <input type="submit" value="Registrar" name="submit_producto">
+
+            </form>
+            </form>
+        </div>
+        <div>
+            <p>Registrar categoría</p>
+            <form action="{% url 'index'%}" method="POST">
+                {% csrf_token %}
+                {{ form_categoria }}
+                <input type="submit" value="Registrar" name="submit_categoria">
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
