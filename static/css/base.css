@@ -1,8 +1,8 @@
-header{
+/* header{
     margin: 0px;
     padding: 0;
     background-color: #33673B;
-}
+} */
 header h1{
     color: snow;
     margin: 0;
@@ -11,9 +11,7 @@ header h1{
 body{
     margin: 0;
 }
-main{
-    padding: 10px;
-}
+
 form{
     display: flex;
     flex-direction: column;

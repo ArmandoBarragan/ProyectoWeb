@@ -4,18 +4,17 @@ from tienda.forms import FormCategoria, FormProducto
 
 # Create your views here.
 def index(request):
+    productos = Producto.objects.all()
+
     if request.method == 'POST' and 'submit_producto' in request.POST:
         producto = FormProducto(request.POST)
         if producto.is_valid():
             data = producto.cleaned_data
-            data_categoria = data['categoria']
-            query_categoria = Categoria.objects.filter(nombre=data_categoria).values()
-            categoria = query_categoria[0]
-            print(categoria)
             
             nombre = data['nombre']
             precio = data['precio']
             imagen = data['imagen']
+            categoria = data['categoria']
             producto_guardado = Producto(
                 nombre = nombre,
                 precio = precio,
@@ -24,7 +23,7 @@ def index(request):
             )
             producto_guardado.save()
 
-    if request.method == 'POST' and 'submit_categoria' in request.POST:
+    elif request.method == 'POST' and 'submit_categoria' in request.POST:
         categoria = FormCategoria(request.POST)
         if categoria.is_valid():
             data = categoria.cleaned_data
@@ -32,11 +31,12 @@ def index(request):
             categoria_guardada = Categoria(nombre=nombre)
             categoria_guardada.save()
 
-
+    elif request.method == 'GET' and request.GET.get('busqueda') != None:
+        query = request.GET.get('busqueda')
+        productos = Producto.objects.filter(nombre__contains=query)
 
     formProducto = FormProducto()
     formCategoria = FormCategoria()
-    productos = Producto.objects.all()
 
     context = {
         "productos": productos,

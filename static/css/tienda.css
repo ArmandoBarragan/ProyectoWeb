@@ -1,3 +1,7 @@
-form{
-    max-width: 30vw;
+p{
+    /* background-color: #419D78; */
+    padding: 5px;
+}
+#main{
+    margin-top: 5px;
 }
