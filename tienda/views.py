@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from tienda.models import Categoria, Producto
 from tienda.forms import FormCategoria, FormProducto
-
 # Create your views here.
 def index(request):
     productos = Producto.objects.all()
@@ -10,11 +9,14 @@ def index(request):
         producto = FormProducto(request.POST)
         if producto.is_valid():
             data = producto.cleaned_data
-            
             nombre = data['nombre']
             precio = data['precio']
-            imagen = data['imagen']
             categoria = data['categoria']
+
+            if 'imagen' in request.FILES: 
+                imagen = request.FILES['imagen']
+            else:
+                imagen = 'static/media/broken.png'
             producto_guardado = Producto(
                 nombre = nombre,
                 precio = precio,

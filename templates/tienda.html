@@ -37,7 +37,7 @@
             </div>
             <div class="">
                 <p class="border-bottom">Registrar producto</p>
-                <form action="{% url 'index'%}" method="POST">
+                <form action="{% url 'index'%}" method="POST" enctype="multipart/form-data"> 
                     {% csrf_token %}
                     <div class="form-group">
                         {{ form_producto.nombre.label }}
