@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static widget_tweaks %}
+
+{% block head %}
+<title>Editar producto</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/tienda.css' %}">
+
+{% endblock %}
+{% block content %}
+<nav class="navbar navbar-light bg-info text-white">
+    <h1>Editar {{producto.nombre }}</h1>
+</nav>
+<form class="container" id="container-edit" method="POST" action="{% url 'update' producto.id %}">
+    {% csrf_token %}
+    <table class="col table table-hover">
+        <thead class="">
+            <tr>
+                <td colspan="5" class="text-center">{{ producto.nombre }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Id</td>
+                <td>Nombre</td>
+                <td>Categoría</td>
+                <td>Precio</td>
+                <td>Imagen</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Antes</td>
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ producto.precio }}</td>
+                <td><img src="{{producto.imagen}}" height="40vw" alt=""></td>
+            </tr>
+            <tr>
+                <td>Ahora</td>
+                <td>{{ producto.id }}</td>
+                <td class="edit-input">{% render_field form_producto.nombre name='nombre' %}</td>
+                <td class="edit-input">{% render_field form_producto.categoria name='categoria' %}</td>
+                <td class="edit-input">{% render_field form_producto.precio name='precio' %}</td>
+                <td class="edit-input">{% render_field form_producto.imagen name='imagen' %}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-right">
+        <input type="submit" class="btn btn-light">
+
+    </div>
+</form>
+{% endblock %}

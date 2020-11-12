@@ -2,6 +2,7 @@ p{
     /* background-color: #419D78; */
     padding: 5px;
 }
-#main{
+#main, #container-edit{
     margin-top: 5px;
 }
+

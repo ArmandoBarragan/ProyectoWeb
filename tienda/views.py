@@ -1,7 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from tienda.models import Categoria, Producto
 from tienda.forms import FormCategoria, FormProducto
 # Create your views here.
+def editar(request, id):
+    producto = Producto.objects.get(pk=id)
+    context = {
+        'producto':producto,
+        'form_producto': FormProducto(),
+    }
+    return render(request, 'editarProducto.html', context=context)    
+
+def borrar(request, id):
+    producto = Producto.objects.filter(id=id)
+    print(producto)
+
+    producto.delete()
+    return redirect('index')
+
 def index(request):
     productos = Producto.objects.all()
 
@@ -46,3 +61,26 @@ def index(request):
         "form_producto": formProducto,
     }
     return render(request, 'tienda.html', context=context)
+
+def update(request, pk):
+    producto = Producto.objects.get(pk=pk)
+    form_producto = FormProducto(request.POST)
+    
+    if form_producto.is_valid():
+        data = form_producto.cleaned_data
+        nombre = data['nombre']
+        categoria = data['categoria']
+        precio = data['precio']
+
+        if 'imagen' in request.FILES:
+            imagen = request.FILES['imagen']
+        else:
+            imagen = 'static/media/broken.png'
+
+        producto.nombre = nombre
+        producto.categoria = categoria
+        producto.precio = precio
+        producto.imagen = imagen
+        producto.save()    
+
+    return redirect('index')

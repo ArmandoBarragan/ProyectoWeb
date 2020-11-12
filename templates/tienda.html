@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
+{% load static widget_tweaks %}
+
 {% block head %}
 <title>Abarrotes</title>
 <!-- {% load static widget_tweaks %} -->
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/tienda.css' %}">
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 {% endblock %}
 {% block content %}
 <nav class="navbar navbar-light bg-info text-white">
@@ -64,7 +64,7 @@
         <table class="col-6 table table-hover">
             <thead class="text-center ">
                 <tr>
-                    <td colspan="6">Productos</td>
+                    <td colspan="7">Productos</td>
                 </tr>
                 <tr>
                     <td>Id</td>
@@ -72,6 +72,7 @@
                     <td>Categoría</td>
                     <td>Precio</td>
                     <td>Imagen</td>
+                    <td></td>
                     <td></td>
                 </tr>
             </thead>
@@ -83,7 +84,8 @@
                     <td>{{ producto.categoria }}</td>
                     <td>{{ producto.precio }}</td>
                     <td><img src="{{producto.imagen}}" height="40vw" alt=""></td>
-                    <td><a href="">Borrar</a></td>
+                    <td><a href="{% url 'borrar' producto.id %}">Borrar</a></td>
+                    <td><a href="{% url 'editar' producto.id %}">Editar</a></td>
                 </tr>
                 {% endfor %}
 
