@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from tienda.urls import urlpatterns as urls_tienda
+from ajax_project.urls import urlpatterns as urls_ajax
 from django.conf import settings
 from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tienda/', include(urls_tienda))
+    path('tienda/', include(urls_tienda)),
+    path('ajax/', include(urls_ajax)),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

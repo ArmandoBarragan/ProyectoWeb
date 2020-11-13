@@ -60,7 +60,7 @@ def index(request):
         "form_categoria": formCategoria,
         "form_producto": formProducto,
     }
-    return render(request, 'tienda.html', context=context)
+    return render(request, 'tienda/tienda.html', context=context)
 
 def update(request, pk):
     producto = Producto.objects.get(pk=pk)
