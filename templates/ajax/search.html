@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load static widget_tweaks %}
+{% block head %}
+Ajax
+{%% endblock %}
 {% block content %}
-
-<div class="row">
-    <form action="" class="col">
+<div class="row container">
+    <form action="" method="POST" class="col">
+        {% csrf_token %}
         <div class="form-group">
             {{ form.name.label }}
             {% render_field form.name class='form-control' %}
@@ -21,11 +24,11 @@
             {% render_field form.salary class='form-control' %}
         </div>
         <input type="submit" class="btn btn-light">
-    </form>   
+    </form>
     <div class="col">
-        <form action="" class="form row">
-            <label for="">Buscar persona</label>
-            <input type="search" name='search' class="form-control">
+        <form action="{% url 'search' %}" method="GET" id="search_form" class="form row">
+            <label>Buscar persona</label>
+            <input type="search" name='search_bar' id="search_bar" class="form-control">
             <input type="submit" class='btn btn-light' id="">
         </form>
         <table class="col">
@@ -37,8 +40,8 @@
                     <td>Salario</td>
                 </tr>
             </thead>
-            <tbody>
-                
+            <tbody id="tbody">
+
             </tbody>
         </table>
     </div>
@@ -46,6 +49,39 @@
 
 {% endblock %}
 {% block extrajs %}
-{% load static %}
-<script src="{% static 'js/ajax_search.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $("#search_bar").keyup(function(e){
+            var name = document.getElementById("search_bar").value;
+            $.ajax({
+                url: "{% url 'search' %}",
+                type: "GET",
+                data: {'name':name},
+                
+                success:function(json){
+                    tableBody = document.getElementById("tbody");
+                    tableBody.innerHtml = "";
+                    imprimir(json);
+                }
+            })
+        })
+    })
+    function imprimir(json){
+        tableBody = document.getElementById("tbody");
+        tableBody.innerHtml = "";
+        tableBody.textContent = "";
+        
+        for (i in json){
+            var row = document.createElement("tr");
+            var dict = json[i]
+            for (j in dict){
+                var column = document.createElement("td");
+                column.innerText = dict[j];
+                row.appendChild(column);
+            }
+            tableBody.appendChild(row);
+        }
+    }
+</script>
+
 {% endblock %}
