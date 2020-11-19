@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static widget_tweaks %}
+{% block title %}
+Login
+{% endblock %}
+{% block content %}
+<form action="" method="POST" class="container card">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.username.for_label }}">{{ form.username.label }}</label>
+        {% render_field form.username class='form-control' %}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.password.for_label }}">{{ form.password.label }}</label>
+        {% render_field form.password class='form-control' %}
+    </div>
+    <div class="text-right">
+        <input type="submit" class="btn btn-success">
+    </div>
+</form>
+
+{% endblock %}
+{% if message %}
+<div class="card">
+    {{ message }}
+</div>
+{% endif %}

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from tienda.urls import urlpatterns as urls_tienda
 from ajax_project.urls import urlpatterns as urls_ajax
+from login_app.views import urlpatterns as urls_login
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tienda/', include(urls_tienda)),
     path('ajax/', include(urls_ajax)),
+    path('login/', include(urls_login)),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
