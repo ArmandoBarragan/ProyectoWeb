@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('search/', views.search, name='search')
+    path('index/', views.index, name='ajax_index'),
+    path('search/', views.search, name='ajax_search')
 ]

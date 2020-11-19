@@ -19,9 +19,11 @@ def borrar(request, id):
 
 def index(request):
     productos = Producto.objects.all()
+    print('hey')
 
     if request.method == 'POST' and 'submit_producto' in request.POST:
         producto = FormProducto(request.POST)
+        print('hey')
         if producto.is_valid():
             data = producto.cleaned_data
             nombre = data['nombre']
