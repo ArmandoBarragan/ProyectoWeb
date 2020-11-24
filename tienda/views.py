@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect
 from tienda.models import Categoria, Producto
 from tienda.forms import FormCategoria, FormProducto
 # Create your views here.
+
 def editar(request, id):
     producto = Producto.objects.get(pk=id)
     context = {
         'producto':producto,
         'form_producto': FormProducto(),
     }
-    return render(request, 'editarProducto.html', context=context)    
+    return render(request, 'tienda/editarProducto.html', context=context)    
 
 def borrar(request, id):
     producto = Producto.objects.filter(id=id)
