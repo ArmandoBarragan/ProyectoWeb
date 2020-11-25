@@ -13,18 +13,14 @@ def editar(request, id):
 
 def borrar(request, id):
     producto = Producto.objects.filter(id=id)
-    print(producto)
-
     producto.delete()
     return redirect('index')
 
 def index(request):
     productos = Producto.objects.all()
-    print('hey')
 
     if request.method == 'POST' and 'submit_producto' in request.POST:
-        producto = FormProducto(request.POST)
-        print('hey')
+        producto = FormProducto(request.POST, request.FILES)
         if producto.is_valid():
             data = producto.cleaned_data
             nombre = data['nombre']
@@ -33,8 +29,10 @@ def index(request):
 
             if 'imagen' in request.FILES: 
                 imagen = request.FILES['imagen']
+                print(imagen)
             else:
-                imagen = 'static/media/broken.png'
+                imagen = '../media/broken.png'
+                print(imagen)
             producto_guardado = Producto(
                 nombre = nombre,
                 precio = precio,
@@ -77,8 +75,9 @@ def update(request, pk):
 
         if 'imagen' in request.FILES:
             imagen = request.FILES['imagen']
+            print(imagen)
         else:
-            imagen = 'static/media/broken.png'
+            imagen = '../media/broken.png'
 
         producto.nombre = nombre
         producto.categoria = categoria

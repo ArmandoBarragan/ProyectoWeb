@@ -81,7 +81,7 @@
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.categoria }}</td>
                         <td>{{ producto.precio }}</td>
-                        <td><img src="{{producto.imagen}}" height="40vw" alt=""></td>
+                        <td><img src="../media/{{producto.imagen}}" height="40vw" alt=""></td>
                         <td><a href="{% url 'borrar' producto.id %}">Borrar</a></td>
                         <td><a href="{% url 'editar' producto.id %}">Editar</a></td>
                     </tr>
