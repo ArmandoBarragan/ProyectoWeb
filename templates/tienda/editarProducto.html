@@ -13,7 +13,7 @@
 </nav>
 <form class="container" id="container-edit" method="POST" action="{% url 'update' producto.id %}">
     {% csrf_token %}
-    <table class="col table table-hover">
+    <table class="table table-striped  table-responsive-sm table-responsive-md table-hover">
         <thead class="">
             <tr>
                 <td colspan="6" class="text-center">{{ producto.nombre }}</td>

@@ -26,8 +26,7 @@ def search(request):
             name = request.GET.get('name')
             query = Person.objects.filter(name__startswith=name)
             people = [people_serializer(person) for person in query]
-            print(people)
-
+            
             return HttpResponse(json.dumps(people), content_type='application/json')
 
         except ValueError as error:
