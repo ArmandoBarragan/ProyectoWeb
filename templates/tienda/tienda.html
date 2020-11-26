@@ -2,20 +2,20 @@
 {% load static widget_tweaks %}
 
 {% block head %}
-<title>Abarrotes</title>
+<title>Tienda</title>
 <!-- {% load static widget_tweaks %} -->
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/tienda.css' %}">
 
 {% endblock %}
 {% block content %}
-<nav class="navbar navbar-light bg-info text-white">
+<nav class="navbar navbar-light navbar-expand-lg bg-info text-white">
     <h1>Tienda</h1>
 </nav>
 
 <div class="container-fluid" id="main">
     <div class="row">
-        <div id="registros" class="col-6">
+        <div id="registros" class="col col-md-6">
             <div>
                 <p class="rounded-sm border-bottom">Registrar categoría</p>
                 <form action="{% url 'index'%}" method="POST">
@@ -53,13 +53,13 @@
                 </form>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-sm-6 col-md">
             <form action="" class="">
                 <label class="border-bottom">Buscar producto</label>
                 <input type="search" class="form-control" name="busqueda">
                 <input type="submit" class="btn btn-light" value="Buscar">
             </form>
-            <table class="table table-hover">
+            <table class="table table-striped w-auto table-responsive-sm table-responsive-md table-hover">
                 <thead class="text-center ">
                     <tr>
                         <td colspan="7">Productos</td>
